@@ -1,0 +1,28 @@
+{
+  "name": "@vue-interface/tailwindcss",
+  "version": "0.1.1",
+  "description": "A helper plugin that makes using TailwindCSS with Vue Interface easy.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vue-interface/tailwindcss.git"
+  },
+  "keywords": [
+    "Vue",
+    "Interface",
+    "Tailwind",
+    "Bootstrap"
+  ],
+  "author": "Justin Kimbrell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vue-interface/tailwindcss/issues"
+  },
+  "homepage": "https://github.com/vue-interface/tailwindcss/docs#readme",
+  "devDependencies": {
+    "color": "^3.1.2",
+    "hex-to-rgba": "^2.0.1",
+    "units-css": "^0.4.0"
+  },
+  "dependencies": {}
+}
