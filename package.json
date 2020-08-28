@@ -19,11 +19,10 @@
     "url": "https://github.com/vue-interface/tailwindcss/issues"
   },
   "homepage": "https://github.com/vue-interface/tailwindcss/docs#readme",
-  "devDependencies": {
+  "dependencies": {
     "color": "^3.1.2",
     "hex-to-rgba": "^2.0.1",
     "tailwindcss": "^1.7.5",
     "units-css": "^0.4.0"
-  },
-  "dependencies": {}
+  }
 }
