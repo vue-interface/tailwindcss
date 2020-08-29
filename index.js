@@ -8,7 +8,7 @@ module.exports = plugin(function({ addComponents, theme }) {
         interface: theme => ({
             active: {
                 color: theme('colors.white', colors.white),
-                backgroundColor: theme('variations.primary', defaultVariations.primary)
+                backgroundColor: theme('interface.variations.primary')
             },
             body: {
                 color: theme('colors.gray.900', colors.gray[900]),
@@ -74,10 +74,10 @@ module.exports = plugin(function({ addComponents, theme }) {
                 lg: 2
             },
             link: {
-                color: theme('variations.primary', defaultVariations.primary),
+                color: theme('interface.variations.primary'),
                 textDecoration: 'underline',
                 hover: {
-                    color: darken(theme('variations.primary', defaultVariations.primary), .15),
+                    color: darken(theme('interface.variations.primary'), .15),
                     textDecoration: undefined,
                     darkness: .15
                 }
