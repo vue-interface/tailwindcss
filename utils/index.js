@@ -10,7 +10,7 @@ const mix = require('./mix');
 const multiply = require('./multiply');
 const quote = require('./quote');
 const rgba = require('./rgba');
-const substract = require('./substract');
+const subtract = require('./subtract');
 
 module.exports = {
     add,
@@ -25,5 +25,5 @@ module.exports = {
     multiply,
     quote,
     rgba,
-    substract
+    subtract
 };
