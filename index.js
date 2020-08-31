@@ -1,6 +1,7 @@
 const plugin = require('tailwindcss/plugin');
 const { colors } = require('tailwindcss/defaultTheme');
 const { rgba, darken } = require('./utils');
+const defaultVariations = require('./defaultVariations');
 
 module.exports = plugin(function({ addComponents }) {
     addComponents({
@@ -11,7 +12,7 @@ module.exports = plugin(function({ addComponents }) {
 }, {
     theme: {
         interface: theme => {
-            const variations = {
+            const variations = Object.assign(defaultVariations, {
                 primary: theme('colors.blue.500', colors.blue['500']),
                 secondary: theme('colors.gray.600', colors.gray['600']),
                 danger: theme('colors.red.600', colors.red['600']),
@@ -21,7 +22,7 @@ module.exports = plugin(function({ addComponents }) {
                 dark: theme('colors.gray.800', colors.gray['800']),
                 light: theme('colors.gray.100', colors.gray['100']),
                 muted: theme('colors.white', colors.white)
-            };
+            });
 
             return {
                 active: {
