@@ -1,9 +1,13 @@
 const plugin = require('tailwindcss/plugin');
 const { colors } = require('tailwindcss/defaultTheme');
-const { darken } = require('./utils');
+const { rgba, darken } = require('./utils');
 
-module.exports = plugin(function({ addComponents, theme }) {
-    //
+module.exports = plugin(function({ addComponents }) {
+    addComponents({
+        '.collapse:not(.show)': {
+            display: 'none'
+        }
+    });
 }, {
     theme: {
         interface: theme => {
@@ -35,9 +39,9 @@ module.exports = plugin(function({ addComponents, theme }) {
                     lg: '.3rem'
                 },
                 boxShadow: {
-                    sm: `0 .5rem 1rem rgba(${theme('colors.black', colors.black)}, .075)`,
-                    base: `0 .5rem 1rem rgba(${theme('colors.black', colors.black)}, .15)`,
-                    lg: `0 .5rem 1rem rgba(${theme('colors.black', colors.black)}, .175)`,
+                    sm: `0 .5rem 1rem ${rgba(theme('colors.black', colors.black), .075)}`,
+                    base: `0 .5rem 1rem ${rgba(theme('colors.black', colors.black), .15)}`,
+                    lg: `0 .5rem 1rem ${rgba(theme('colors.black', colors.black), .175)}`,
                 },
                 borderWidth: '1px',
                 caret: {
@@ -75,12 +79,30 @@ module.exports = plugin(function({ addComponents, theme }) {
                     base: '1rem',
                     lg: '1.25rem',
                 },
-                gradient: `linear-gradient(180deg, rgba(${theme('colors.white', colors.white)}, .15), rgba(${theme('colors.white', colors.white)}, 0))`,
+                gradient: `linear-gradient(180deg, ${rgba(theme('colors.white', colors.white), .15)}, ${rgba(theme('colors.white', colors.white), 0)})`,
                 hr: {
                     marginY: '1rem',
                     color: 'inherit',
                     height: '1px',
                     opacity: .25
+                },
+                input: {
+                    paddingY: '.375rem',
+                    paddingX: '.75rem',
+                    focus: {
+                        width: '.2rem',
+                        colorOpacity: .25,
+                        color: rgba(variations.primary, .25),
+                        boxShadow: `0 0 0 .2rem ${rgba(variations.primary, .25)}`
+                    },
+                    sm: {
+                        paddingY: '.25rem',
+                        paddingX: '.5rem',
+                    },
+                    lg: {
+                        paddingY: '.5rem',
+                        paddingX: '1rem',
+                    }
                 },
                 lineHeight: {
                     sm: 1.25,
