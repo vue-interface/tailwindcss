@@ -69,7 +69,7 @@ class Breakpoints {
     }
 
     min() {
-        return this.sortMax()[0];
+        return this.sortMin()[0];
     }
 
     max() {
@@ -77,21 +77,35 @@ class Breakpoints {
     }    
 
     next(name) {
-        return this.index(name, this.sortMin());
+        const entries = this.sortMin();
+        const index = this.indexOf(name, entries);
+
+        return entries[index + 1];
     }
 
     prev(name) {
-        return this.index(name, this.sortMax());
+        const entries = this.sortMax();
+        const index = this.indexOf(name, entries);
+
+        return entries[index - 1];
     }
 
-    index(name, entries) {
-        entries = entries || this.entries();
+    indexOf(name, entries) {
+        entries = entries || this.sortMin();
+
+        return entries.indexOf(entries.find(([ key ]) => {
+            return key === name;
+        }));
+    }
+
+    find(name, entries) {
+        entries = entries || this.sortMin();
 
         const index = entries.indexOf(entries.find(([ key ]) => {
             return key === name;
-        }));
+        }), entries);
 
-        return entries[index + 1];
+        return entries[index];
     }
 
     sortMin() {
@@ -102,12 +116,18 @@ class Breakpoints {
 
     sortMax() {
         return this.entries().sort(([x, a], [y, b]) => {
-            return Math.min(a.min().value, a.max().value) > Math.max(b.min().value, b.max().value) ? 1 : -1;
+            return Math.min(a.min().value, a.max().value) < Math.min(b.min().value, b.max().value) ? 1 : -1;
         });
     }
 
     infix(subject, name) {
         const [ key ] = this.min();
+
+        return `${subject || ''}${name === key ? '' : (name ? `-${name}` : '')}`;
+    }
+
+    postfix(subject, name) {
+        const [ key ] = this.max();
 
         return `${subject || ''}${name === key ? '' : (name ? `-${name}` : '')}`;
     }

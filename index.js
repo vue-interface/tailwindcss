@@ -44,6 +44,7 @@ module.exports = plugin(function({ addComponents }) {
                     base: `0 .5rem 1rem ${rgba(theme('colors.black', colors.black), .15)}`,
                     lg: `0 .5rem 1rem ${rgba(theme('colors.black', colors.black), .175)}`,
                 },
+                borderColor: theme('colors.gray.300', colors.gray[300]),
                 borderWidth: '1px',
                 caret: {
                     widht: '.3em',
@@ -133,7 +134,16 @@ module.exports = plugin(function({ addComponents }) {
                     fade: 'opacity .15s linear',
                     collapse: 'height .35ss ease',
                 },
-                variations
+                variations,
+                zIndex: {
+                    dropdown: 1000,
+                    sticky: 1020,
+                    fixed: 1030,
+                    modalBackdrop: 1040,
+                    modal: 1050,
+                    popover: 1060,
+                    tooltip: 1070,
+                }
             };
         }
     }
