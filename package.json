@@ -1,6 +1,6 @@
 {
   "name": "@vue-interface/tailwindcss",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A helper plugin that makes using TailwindCSS with Vue Interface easy.",
   "main": "index.js",
   "repository": {
