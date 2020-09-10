@@ -9,6 +9,7 @@ const flatten = require('./flatten');
 const mix = require('./mix');
 const multiply = require('./multiply');
 const quote = require('./quote');
+const resetText = require('./resetText');
 const rgba = require('./rgba');
 const subtract = require('./subtract');
 
@@ -24,6 +25,7 @@ module.exports = {
     mix,
     multiply,
     quote,
+    resetText,
     rgba,
     subtract
 };

@@ -1,16 +1,74 @@
 const plugin = require('tailwindcss/plugin');
 const { colors } = require('tailwindcss/defaultTheme');
-const { rgba, darken } = require('./utils');
+const { rgba, darken, multiply } = require('./utils');
 const defaultVariations = require('./defaultVariations');
 
-module.exports = plugin(function({ addComponents }) {
+module.exports = plugin(function({ theme, addComponents }) {
     addComponents({
+        '.fade': {
+            transition: theme('interface.transition.fade'),
+        },
+
+        '.fade:not(.show)': {
+            opacity: 0,
+        },
+          
         '.collapse:not(.show)': {
             display: 'none'
+        },
+          
+        '.collapsing': {
+            height: 0,
+            overflow: 'hidden',
+            transition: theme('interface.transition.collapse'),
+        },
+
+        '.close': {
+            fontSize: theme('close.fontSize'),
+            fontWeight: theme('close.fontWeight'),
+            lineHeight: 1,
+            color: theme('close.color'),
+            textShadow: theme('close.textShadow'),
+            opacity: .5,
+        },
+        
+        // Override <a>'s hover style
+        '.close:hover': {
+            color: theme('close.color'),
+            textDecoration: 'none',
+        },
+        
+        '.close:hover, .close:focus': {
+            opacity: .75
+        },
+        
+        '.close:disabled, .close.disabled': {
+            pointerEvents: 'none'
+        },
+          
+        // Additional properties for button version
+        // iOS requires the button element instead of an anchor tag.
+        // If you want the anchor version, it requires `href="#"`.
+        // See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+        
+        // stylelint-disable-next-line selector-no-qualifying-type
+        'button.close': {
+            padding: 0,
+            backgroundColor: 'transparent',
+            border: 0,
         }
+          
     });
 }, {
     theme: {
+        close: theme => {
+            return {
+                fontSize: multiply(theme('interface.fontSize'), 1.5),
+                fontWeight: theme('interface.fontWeight.bold'),
+                color: theme('colors.black', colors.black),
+                textShadow: `0 1px 0 ${theme('colors.white', colors.white)}`,
+            };
+        },
         interface: theme => {
             const variations = Object.assign(defaultVariations, {
                 primary: theme('colors.blue.500', colors.blue['500']),
@@ -81,6 +139,14 @@ module.exports = plugin(function({ addComponents }) {
                     base: '1rem',
                     lg: '1.25rem',
                 },
+                fontWeight: {
+                    lighter: 'lighter',
+                    light: 300,
+                    normal: 400,
+                    base: 400,
+                    bold: 700,
+                    bolder: 'bolder',
+                },
                 gradient: `linear-gradient(180deg, ${rgba(theme('colors.white', colors.white), .15)}, ${rgba(theme('colors.white', colors.white), 0)})`,
                 hr: {
                     marginY: '1rem',
@@ -132,7 +198,7 @@ module.exports = plugin(function({ addComponents }) {
                 transition: {
                     base: 'all .2s ease-in-out',
                     fade: 'opacity .15s linear',
-                    collapse: 'height .35ss ease',
+                    collapse: 'height .35s ease',
                 },
                 variations,
                 zIndex: {
